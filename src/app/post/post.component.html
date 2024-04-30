@@ -4,3 +4,9 @@
   </option>
 </select>
 <button (click)="loadOrdersForCustomer()">Cargar Órdenes</button>
+
+<select *ngIf="orders.length > 0" [formControl]="selectedOrder">
+  <option *ngFor="let order of orders" [value]="order.orderNumber">
+    Orden N° {{ order.orderNumber }}
+  </option>
+</select>
