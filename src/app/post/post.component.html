@@ -47,8 +47,25 @@
       </div>
   </div>
 
-  <h2>Informacion de la orden</h2>
-  <div class="containerEmployeInfo">
+  <h2>Informacion del empleado</h2>
+  <section class="containerEmployeInfo">
+    <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
     
+      <div class="detailContent">
+        <p>Employe Number:</p>
+        <span>{{ selectedCustomerEmploye.salesRepEmployeeNumber }}</span>
+      </div>
+      
+      <div class="detailContent">
+        <p>Employe Name:</p>
+        <span>{{ selectedCustomerEmploye.lastName }} {{ selectedCustomerEmploye.firstName }}</span>
+      </div>
+
+      <div class="detailContent">
+        <p>Email:</p>
+        <span>{{ selectedCustomerEmploye.email }}</span>
+      </div>
   </div>
+
+  </section>
 </main>

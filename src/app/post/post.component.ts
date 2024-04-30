@@ -16,14 +16,17 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';  // Importa R
 export class PostComponent implements OnInit {
   http = inject(HttpClient);
   posts: any = [];
+  employes: any = []; // Almacena los empleados
   uniqueCustomers: any = []; // Almacena los clientes únicos
   orders: any = [];
   selectedCustomer = new FormControl('');
   selectedOrder = new FormControl(''); 
   selectedCustomerDetail: any = null; 
+  selectedCustomerEmploye: any = null; 
 
   ngOnInit(): void {
     this.fetchPosts();
+    this.fetchEmploye();
   }
 
   fetchPosts() {
@@ -31,6 +34,13 @@ export class PostComponent implements OnInit {
       .subscribe((posts: any) => {
         this.posts = posts;
         this.filterUniqueCustomers(); // Filtra los clientes para obtener únicos después de obtener los datos
+      });
+  }
+
+  fetchEmploye() {
+    this.http.get('http://localhost:3300/employes/')
+      .subscribe((employes: any) => {
+        this.employes = employes;
       });
   }
 
@@ -64,17 +74,28 @@ export class PostComponent implements OnInit {
       console.log("No se ha seleccionado ninguna orden.");
       return;
     }
-
+  
     const order = this.orders.find((o: any) => `${o.orderNumber}` === `${this.selectedOrder.value}`);
-    if (order) {
-      this.selectedCustomerDetail = this.posts.find((c: any) =>
-        `${c.orderNumber}` === `${order.orderNumber}` && `${c.customerNumber}` === `${order.customerNumber}`);
-      console.log(this.selectedCustomerDetail)
-      if (!this.selectedCustomerDetail) {
-        console.log("No se encontraron detalles del cliente para la orden seleccionada.");
-      }
-    } else {
+    if (!order) {
       console.log("No se encontró la orden seleccionada.");
+      return;
+    }
+  
+    this.selectedCustomerDetail = this.posts.find((c: any) =>
+      `${c.orderNumber}` === `${order.orderNumber}` && `${c.customerNumber}` === `${order.customerNumber}`);
+  
+    if (!this.selectedCustomerDetail) {
+      console.log("No se encontraron detalles del cliente para la orden seleccionada.");
+      return;
+    }
+  
+    this.selectedCustomerEmploye = this.employes.find((e: any) =>
+      `${e.salesRepEmployeeNumber}` === `${this.selectedCustomerDetail.salesRepEmployeeNumber}`);
+  
+    if (this.selectedCustomerEmploye) {
+      console.log(this.selectedCustomerEmploye);
+    } else {
+      console.log("No se encontraron detalles del empleado para el cliente seleccionado.");
     }
   }
 }
