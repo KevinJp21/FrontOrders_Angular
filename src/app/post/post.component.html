@@ -1,8 +1,10 @@
 <main class="main">
   <div class="containerInputs">
+    <h1>Seleccione un cliente</h1>
     <div class="containerCustomerSelect">
+     
       <select [formControl]="selectedCustomer">
-        <option *ngFor="let customer of uniqueCustomers" [value]="customer.customerNumber">
+        <option *ngFor="let customer of uniqueCustomers" [value]="customer.customerNumber" >
           {{ customer.customerNumber }} - {{ customer.customerName }}
         </option>
       </select>
@@ -19,9 +21,9 @@
     </div>
   </div>
   <section>
-    <h2>Informacion de la orden</h2>
+   
     <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
-      
+      <h2>Informacion de la orden</h2>
         <div class="detailContent">
           <p>CustomerNumber:</p>
           <span>{{ selectedCustomerDetail.customerNumber }}</span>
@@ -51,9 +53,8 @@
 
 
   <section class="containerEmployeInfo">
-    <h2>Informacion del empleado</h2>
     <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
-    
+      <h2>Informacion del empleado</h2>
       <div class="detailContent">
         <p>Employe Number:</p>
         <span>{{ selectedCustomerEmploye.salesRepEmployeeNumber }}</span>
@@ -71,9 +72,9 @@
   </div>
   </section>
 
-  <section class="ordersDetails">
+  <section class="ordersDetails" *ngIf="selectedCustomerDetail">
     <h2>Datalles de la orden</h2>
-    <table class="table table-striped"  *ngIf="selectedCustomerDetail">
+    <table class="table table-striped"  >
       <thead>
           <tr>
               <th>N°Orden</th>
