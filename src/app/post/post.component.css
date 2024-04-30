@@ -8,10 +8,17 @@ body{
     padding: 0 !important;
     overflow: auto !important;
 }
+
+.main{
+    padding: 50px;
+    width: 100%;
+    height: 100vh;
+}
 .containerInputs{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 20px;
 }
 .containerCustomerSelect{
     display: flex;
@@ -21,12 +28,17 @@ body{
     height: 30px;
 }
 
-.containerCustomerSelect button{
+button{
     background-color: aqua;
+    font-size: 13px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
+    width: 150px;
+    height: 40px;
     cursor: pointer;
 }
+
 
 .containerCustomersOrdersSelect{
     display: flex;
@@ -58,9 +70,13 @@ body{
 
 
 .detailContent span{
-    height: 100%;
     padding: 10px;
+    border: 2px solid rgb(83, 83, 83);
     background-color: gray;
     color: white;
     text-align: center;
+}
+
+section{
+    margin-bottom: 20px;
 }

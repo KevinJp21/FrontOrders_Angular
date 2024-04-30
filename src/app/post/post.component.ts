@@ -1,14 +1,14 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';  // Importa ReactiveFormsModule y FormControl
+import { ReactiveFormsModule, FormControl } from '@angular/forms'; 
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
     NgForOf, NgIf,
-    ReactiveFormsModule  // Añade ReactiveFormsModule a las importaciones del componente
+    ReactiveFormsModule 
   ],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
@@ -16,8 +16,8 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';  // Importa R
 export class PostComponent implements OnInit {
   http = inject(HttpClient);
   posts: any = [];
-  employes: any = []; // Almacena los empleados
-  uniqueCustomers: any = []; // Almacena los clientes únicos
+  employes: any = [];
+  uniqueCustomers: any = [];
   orders: any = [];
   ordersDetail: any = [];
   selectedCustomer = new FormControl('');
@@ -117,4 +117,13 @@ export class PostComponent implements OnInit {
     console.log("No se encontraron detalles de la orden seleccionada.");
   }
   }
+
+  calculateTotalPrice(): number {
+    if (!this.selectedOrderDetails) return 0;
+  
+    return this.selectedOrderDetails.reduce((total: number, item: { quantityOrdered: number; priceEach: number }) => {
+      return total + (item.quantityOrdered * item.priceEach);
+    }, 0);
+  }
+
 }

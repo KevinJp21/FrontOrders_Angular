@@ -18,37 +18,40 @@
       <button (click)="loadCustomerInfo()">Cargar Customer info</button>
     </div>
   </div>
-  <h2>Informacion de la orden</h2>
-  <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
-    
-      <div class="detailContent">
-        <p>CustomerNumber:</p>
-        <span>{{ selectedCustomerDetail.customerNumber }}</span>
-      </div>
+  <section>
+    <h2>Informacion de la orden</h2>
+    <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
       
-      <div class="detailContent">
-        <p>CustomerName:</p>
-        <span>{{ selectedCustomerDetail.customerName }}</span>
-      </div>
+        <div class="detailContent">
+          <p>CustomerNumber:</p>
+          <span>{{ selectedCustomerDetail.customerNumber }}</span>
+        </div>
+        
+        <div class="detailContent">
+          <p>CustomerName:</p>
+          <span>{{ selectedCustomerDetail.customerName }}</span>
+        </div>
+  
+        <div class="detailContent">
+          <p>Phone:</p>
+          <span>{{ selectedCustomerDetail.phone }}</span>
+        </div>
+  
+        <div class="detailContent">
+          <p>OrderNumber:</p>
+          <span>{{selectedCustomerDetail.orderNumber }}</span>
+        </div>
+  
+        <div class="detailContent">
+          <p>OrderDate:</p>
+          <span>{{selectedCustomerDetail.orderDate }}</span>
+        </div>
+    </div>
+  </section>
 
-      <div class="detailContent">
-        <p>Phone:</p>
-        <span>{{ selectedCustomerDetail.phone }}</span>
-      </div>
 
-      <div class="detailContent">
-        <p>OrderNumber:</p>
-        <span>{{selectedCustomerDetail.orderNumber }}</span>
-      </div>
-
-      <div class="detailContent">
-        <p>OrderDate:</p>
-        <span>{{selectedCustomerDetail.orderDate }}</span>
-      </div>
-  </div>
-
-  <h2>Informacion del empleado</h2>
   <section class="containerEmployeInfo">
+    <h2>Informacion del empleado</h2>
     <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
     
       <div class="detailContent">
@@ -78,6 +81,7 @@
               <th>CantOrdenada</th>
               <th>priceEach</th>
               <th>orderLineNumber</th>
+              <th>PrecioTotal</th>
           </tr>
       </thead>
       <tbody>
@@ -87,6 +91,7 @@
               <td>{{detail.quantityOrdered}}</td>
               <td>{{detail.priceEach}}</td>
               <td>{{detail.orderLineNumber}}</td>
+              <td>{{ detail.quantityOrdered * detail.priceEach}}</td>
           </tr>
       </tbody>
       <tfoot>
@@ -96,6 +101,9 @@
             <th>CantOrdenada</th>
             <th>priceEach</th>
             <th>orderLineNumber</th>
+            <th>PrecioTotal</th>
+            <th colspan="5">Total: {{ calculateTotalPrice() }}</th>
+            <th></th>
           </tr>
       </tfoot>
   </table>
