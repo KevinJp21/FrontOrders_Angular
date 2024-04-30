@@ -2,7 +2,7 @@
   <div class="containerInputs">
     <div class="containerCustomerSelect">
       <select [formControl]="selectedCustomer">
-        <option *ngFor="let customer of posts" [value]="customer.customerNumber">
+        <option *ngFor="let customer of uniqueCustomers" [value]="customer.customerNumber">
           {{ customer.customerNumber }} - {{ customer.customerName }}
         </option>
       </select>

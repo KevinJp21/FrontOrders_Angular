@@ -16,7 +16,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';  // Importa R
 export class PostComponent implements OnInit {
   http = inject(HttpClient);
   posts: any = [];
-  details: any = [];
+  uniqueCustomers: any = []; // Almacena los clientes únicos
   orders: any = [];
   selectedCustomer = new FormControl('');
   selectedOrder = new FormControl(''); 
@@ -30,7 +30,22 @@ export class PostComponent implements OnInit {
     this.http.get('http://localhost:3300/customers/')
       .subscribe((posts: any) => {
         this.posts = posts;
+        this.filterUniqueCustomers(); // Filtra los clientes para obtener únicos después de obtener los datos
       });
+  }
+
+  filterUniqueCustomers() {
+    const customerNumbers = new Set();
+    const unique: any[] = [];
+
+    this.posts.forEach((customer: { customerNumber: unknown; }) => {
+      if (!customerNumbers.has(customer.customerNumber)) {
+        customerNumbers.add(customer.customerNumber);
+        unique.push(customer);
+      }
+    });
+
+    this.uniqueCustomers = unique; // Asigna a la propiedad uniqueCustomers los clientes sin duplicar
   }
 
   loadOrdersForCustomer() {
@@ -38,28 +53,28 @@ export class PostComponent implements OnInit {
       console.log("No se ha seleccionado ningún cliente.");
       return;
     }
-    this.http.get(`http://localhost:3300/ordersCustomers/${this.selectedCustomer.value}`)  // Asegúrate de que la URL sea correcta
+    this.http.get(`http://localhost:3300/ordersCustomers/${this.selectedCustomer.value}`)
       .subscribe((orders: any) => {
         this.orders = orders;
       });
   }
 
   loadCustomerInfo() {
-  if (!this.selectedOrder.value) {
-    console.log("No se ha seleccionado ninguna orden.");
-    return;
-  }
-
-  const order = this.orders.find((o: any) => `${o.orderNumber}` === `${this.selectedOrder.value}`);
-  if (order) {
-    // Asegúrate de que ambos valores son del mismo tipo antes de comparar
-    this.selectedCustomerDetail = this.posts.find((c: any) => `${c.orderNumber}` === `${order.orderNumber}`);
-    console.log(this.selectedCustomerDetail)
-    if (!this.selectedCustomerDetail) {
-      console.log("No se encontraron detalles del cliente para la orden seleccionada.");
+    if (!this.selectedOrder.value) {
+      console.log("No se ha seleccionado ninguna orden.");
+      return;
     }
-  } else {
-    console.log("No se encontró la orden seleccionada.");
+
+    const order = this.orders.find((o: any) => `${o.orderNumber}` === `${this.selectedOrder.value}`);
+    if (order) {
+      this.selectedCustomerDetail = this.posts.find((c: any) =>
+        `${c.orderNumber}` === `${order.orderNumber}` && `${c.customerNumber}` === `${order.customerNumber}`);
+      console.log(this.selectedCustomerDetail)
+      if (!this.selectedCustomerDetail) {
+        console.log("No se encontraron detalles del cliente para la orden seleccionada.");
+      }
+    } else {
+      console.log("No se encontró la orden seleccionada.");
+    }
   }
-}
 }
