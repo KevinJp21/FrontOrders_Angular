@@ -2,10 +2,7 @@
   <div class="containerInputs">
     <div class="containerCustomerSelect">
       <select [formControl]="selectedCustomer">
-        <option
-          *ngFor="let customer of posts"
-          [value]="customer.customerNumber"
-        >
+        <option *ngFor="let customer of posts" [value]="customer.customerNumber">
           {{ customer.customerNumber }} - {{ customer.customerName }}
         </option>
       </select>
@@ -18,13 +15,31 @@
           Orden N° {{ order.orderNumber }}
         </option>
       </select>
-      <button >Cargar Customer info</button>
+      <button (click)="loadCustomerInfo()">Cargar Customer info</button>
     </div>
   </div>
 
   <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
     <div class="CusName">
-      <p>CustomerNumber: <span>{{ selectedCustomerDetail.customerNumber }}</span></p>
+      <div class="detailContent">
+        <p>CustomerNumber: <span>{{ selectedCustomerDetail.customerNumber }}</span></p>
+      </div>
+      
+      <div class="detailContent">
+        <p>CustomerName: <span>{{ selectedCustomerDetail.customerName }}</span></p>
+      </div>
+
+      <div class="detailContent">
+        <p>Phone: <span>{{ selectedCustomerDetail.phone }}</span></p>
+      </div>
+
+      <div class="detailContent">
+        <p>OrderNumber: <span>{{selectedCustomerDetail.orderNumber }}</span></p>
+      </div>
+
+      <div class="detailContent">
+        <p>OrderDate: <span>{{selectedCustomerDetail.orderDate }}</span></p>
+      </div>
     </div>
   </div>
 </main>

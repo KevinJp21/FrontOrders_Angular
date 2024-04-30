@@ -16,6 +16,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';  // Importa R
 export class PostComponent implements OnInit {
   http = inject(HttpClient);
   posts: any = [];
+  details: any = [];
   orders: any = [];
   selectedCustomer = new FormControl('');
   selectedOrder = new FormControl(''); 
@@ -26,7 +27,7 @@ export class PostComponent implements OnInit {
   }
 
   fetchPosts() {
-    this.http.get('http://localhost:3300/customers')
+    this.http.get('http://localhost:3300/customers/')
       .subscribe((posts: any) => {
         this.posts = posts;
       });
@@ -42,4 +43,23 @@ export class PostComponent implements OnInit {
         this.orders = orders;
       });
   }
+
+  loadCustomerInfo() {
+  if (!this.selectedOrder.value) {
+    console.log("No se ha seleccionado ninguna orden.");
+    return;
+  }
+
+  const order = this.orders.find((o: any) => `${o.orderNumber}` === `${this.selectedOrder.value}`);
+  if (order) {
+    // Asegúrate de que ambos valores son del mismo tipo antes de comparar
+    this.selectedCustomerDetail = this.posts.find((c: any) => `${c.orderNumber}` === `${order.orderNumber}`);
+    console.log(this.selectedCustomerDetail)
+    if (!this.selectedCustomerDetail) {
+      console.log("No se encontraron detalles del cliente para la orden seleccionada.");
+    }
+  } else {
+    console.log("No se encontró la orden seleccionada.");
+  }
+}
 }
