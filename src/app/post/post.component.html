@@ -66,6 +66,38 @@
         <span>{{ selectedCustomerEmploye.email }}</span>
       </div>
   </div>
+  </section>
 
+  <section class="ordersDetails">
+    <h2>Datalles de la orden</h2>
+    <table class="table table-striped table-hover"  *ngIf="selectedCustomerDetail">
+      <thead>
+          <tr>
+              <th>N°Orden</th>
+              <th>codProducto</th>
+              <th>CantOrdenada</th>
+              <th>priceEach</th>
+              <th>orderLineNumber</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let detail of selectedOrderDetails">
+              <td>{{detail.orderNumber}}</td>
+              <td>{{detail.productCode}}</td>
+              <td>{{detail.quantityOrdered}}</td>
+              <td>{{detail.priceEach}}</td>
+              <td>{{detail.orderLineNumber}}</td>
+          </tr>
+      </tbody>
+      <tfoot>
+          <tr>
+            <th>N°Orden</th>
+            <th>codProducto</th>
+            <th>CantOrdenada</th>
+            <th>priceEach</th>
+            <th>orderLineNumber</th>
+          </tr>
+      </tfoot>
+  </table>
   </section>
 </main>

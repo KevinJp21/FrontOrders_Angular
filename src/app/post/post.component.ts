@@ -19,14 +19,17 @@ export class PostComponent implements OnInit {
   employes: any = []; // Almacena los empleados
   uniqueCustomers: any = []; // Almacena los clientes únicos
   orders: any = [];
+  ordersDetail: any = [];
   selectedCustomer = new FormControl('');
   selectedOrder = new FormControl(''); 
   selectedCustomerDetail: any = null; 
   selectedCustomerEmploye: any = null; 
+  selectedOrderDetails: any = null;
 
   ngOnInit(): void {
     this.fetchPosts();
     this.fetchEmploye();
+    this.fetchOrderDetails();
   }
 
   fetchPosts() {
@@ -41,6 +44,13 @@ export class PostComponent implements OnInit {
     this.http.get('http://localhost:3300/employes/')
       .subscribe((employes: any) => {
         this.employes = employes;
+      });
+  }
+
+  fetchOrderDetails() {
+    this.http.get('http://localhost:3300/orderDetails/')
+     .subscribe((ordersDetail: any) => {
+        this.ordersDetail = ordersDetail;
       });
   }
 
@@ -97,5 +107,14 @@ export class PostComponent implements OnInit {
     } else {
       console.log("No se encontraron detalles del empleado para el cliente seleccionado.");
     }
+
+    this.selectedOrderDetails = this.ordersDetail.filter((d: any) =>
+    `${d.orderNumber}` === `${this.selectedCustomerDetail.orderNumber}`);
+
+  if (this.selectedOrderDetails.length > 0) {
+    console.log(this.selectedOrderDetails);
+  } else {
+    console.log("No se encontraron detalles de la orden seleccionada.");
+  }
   }
 }
