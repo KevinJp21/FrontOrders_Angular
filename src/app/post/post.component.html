@@ -1,0 +1,6 @@
+<select [formControl]="selectedCustomer">
+  <option *ngFor="let customer of posts" [value]="customer.customerNumber">
+    {{ customer.customerNumber }} - {{ customer.customerName }}
+  </option>
+</select>
+<button (click)="loadOrdersForCustomer()">Cargar Órdenes</button>
