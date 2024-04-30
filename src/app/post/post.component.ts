@@ -19,6 +19,7 @@ export class PostComponent implements OnInit {
   orders: any = [];
   selectedCustomer = new FormControl('');
   selectedOrder = new FormControl(''); 
+  selectedCustomerDetail: any = null; 
 
   ngOnInit(): void {
     this.fetchPosts();

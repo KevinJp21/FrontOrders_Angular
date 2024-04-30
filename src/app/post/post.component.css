@@ -1,0 +1,28 @@
+.containerInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.containerCustomerSelect{
+    display: flex;
+    gap: 20px;
+}
+.containerCustomerSelect select{
+    height: 30px;
+}
+
+.containerCustomerSelect button{
+    background-color: aqua;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.containerCustomersOrdersSelect{
+    display: flex;
+    gap: 20px;
+}
+
+.containerCustomersOrdersSelect select{
+    height: 30px;
+}
