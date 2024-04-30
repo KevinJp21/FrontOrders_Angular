@@ -26,3 +26,31 @@
 .containerCustomersOrdersSelect select{
     height: 30px;
 }
+
+.containerCustomerInfo{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
+.detailContent{
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.detailContent p{
+    margin: 0;
+}
+
+
+.detailContent span{
+    height: 20px;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    text-align: center;
+}

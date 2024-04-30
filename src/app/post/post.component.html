@@ -18,28 +18,37 @@
       <button (click)="loadCustomerInfo()">Cargar Customer info</button>
     </div>
   </div>
-
+  <h2>Informacion de la orden</h2>
   <div class="containerCustomerInfo" *ngIf="selectedCustomerDetail">
-    <div class="CusName">
+    
       <div class="detailContent">
-        <p>CustomerNumber: <span>{{ selectedCustomerDetail.customerNumber }}</span></p>
+        <p>CustomerNumber:</p>
+        <span>{{ selectedCustomerDetail.customerNumber }}</span>
       </div>
       
       <div class="detailContent">
-        <p>CustomerName: <span>{{ selectedCustomerDetail.customerName }}</span></p>
+        <p>CustomerName:</p>
+        <span>{{ selectedCustomerDetail.customerName }}</span>
       </div>
 
       <div class="detailContent">
-        <p>Phone: <span>{{ selectedCustomerDetail.phone }}</span></p>
+        <p>Phone:</p>
+        <span>{{ selectedCustomerDetail.phone }}</span>
       </div>
 
       <div class="detailContent">
-        <p>OrderNumber: <span>{{selectedCustomerDetail.orderNumber }}</span></p>
+        <p>OrderNumber:</p>
+        <span>{{selectedCustomerDetail.orderNumber }}</span>
       </div>
 
       <div class="detailContent">
-        <p>OrderDate: <span>{{selectedCustomerDetail.orderDate }}</span></p>
+        <p>OrderDate:</p>
+        <span>{{selectedCustomerDetail.orderDate }}</span>
       </div>
-    </div>
+  </div>
+
+  <h2>Informacion de la orden</h2>
+  <div class="containerEmployeInfo">
+    
   </div>
 </main>
